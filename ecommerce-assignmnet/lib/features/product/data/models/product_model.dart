@@ -5,7 +5,7 @@ class ProductModel {
   String? slug;
   Null? metaDescription;
   String? description;
-  Null? regularPrice;
+  int? regularPrice;
   int? currentPrice;
   int? quantity;
   String? createdAt;

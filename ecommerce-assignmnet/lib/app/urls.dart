@@ -12,12 +12,16 @@ class Urls {
   static String productListUrl = '$_baseUrl/products';
   static String cartPostUrl = '$_baseUrl/cart';
 
-  static String productListByIdUrl(String id) =>
-      '$_baseUrl/products/id/$id';
+  static String productListByIdUrl(String id) => '$_baseUrl/products/id/$id';
 
   static String productListByCategoryUrl(String categoryId) =>
       '$_baseUrl/products/id/$categoryId';
 
   static String productDetailsUrl(int productId) =>
       '$_baseUrl/products/id/$productId';
+
+  static String productReviewsUrl(String productId) =>
+      '$_baseUrl/reviews?product=$productId';
+  static String createProductReviewUrl = '$_baseUrl/review';
+
 }

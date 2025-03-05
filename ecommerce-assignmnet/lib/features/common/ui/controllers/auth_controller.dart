@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthController {
   final String _accessTokenKey = 'access-token';
-  final String _profileDataKey = 'access-token';
+  final String _profileDataKey = 'profile-data'; // Fixed incorrect key
 
   String? accessToken;
   User? profileModel;
@@ -12,17 +12,20 @@ class AuthController {
   Future<void> saveUserData(String accessToken, User userModel) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     await sharedPreferences.setString(_accessTokenKey, accessToken);
-    await sharedPreferences.setString(
-        _profileDataKey, jsonEncode(userModel.toJson()));
+    await sharedPreferences.setString(_profileDataKey, jsonEncode(userModel.toJson()));
     profileModel = userModel;
   }
 
   Future<void> getUserData() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     accessToken = sharedPreferences.getString(_accessTokenKey);
-    profileModel = User.fromJson(
-      jsonDecode(sharedPreferences.getString(_profileDataKey)!),
-    );
+
+    String? profileData = sharedPreferences.getString(_profileDataKey);
+    if (profileData != null) {
+      profileModel = User.fromJson(jsonDecode(profileData));
+    } else {
+      profileModel = null; // Handle case where no user data is stored
+    }
   }
 
   Future<bool> isUserLoggedIn() async {

@@ -1,3 +1,4 @@
+import 'package:assignment_project/features/cart/ui/controller/cart_item_controller.dart';
 import 'package:assignment_project/features/cart/ui/screens/cart_list_screen.dart';
 import 'package:assignment_project/features/category/ui/screens/category_list_screen.dart';
 import 'package:assignment_project/features/common/ui/controllers/category_list_controller.dart';
@@ -33,6 +34,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
     Get.find<SliderListController>().getSliders();
     Get.find<CategoryListController>().getCategoryList();
     Get.find<ProductListController>().getProductList();
+    Get.find<CartItemScreenController>().getCartItemList();
   }
 
   @override

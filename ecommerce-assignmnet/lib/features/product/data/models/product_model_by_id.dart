@@ -10,7 +10,9 @@ class ProductPaginationModelById {
     code = json['code'];
     status = json['status'];
     msg = json['msg'];
-    data = json['data'] != null ? new ProductModelById.fromJson(json['data']) : null;
+    data = json['data'] != null
+        ? new ProductModelById.fromJson(json['data'])
+        : null;
   }
 }
 
@@ -22,7 +24,7 @@ class ProductModelById {
   String? slug;
   Null? metaDescription;
   String? description;
-  Null? regularPrice;
+  int? regularPrice;
   int? currentPrice;
   int? quantity;
   String? createdAt;
@@ -31,18 +33,18 @@ class ProductModelById {
 
   ProductModelById(
       {this.sId,
-        this.title,
-        this.brand,
-        this.categories,
-        this.slug,
-        this.metaDescription,
-        this.description,
-        this.regularPrice,
-        this.currentPrice,
-        this.quantity,
-        this.createdAt,
-        this.updatedAt,
-        this.iV});
+      this.title,
+      this.brand,
+      this.categories,
+      this.slug,
+      this.metaDescription,
+      this.description,
+      this.regularPrice,
+      this.currentPrice,
+      this.quantity,
+      this.createdAt,
+      this.updatedAt,
+      this.iV});
 
   ProductModelById.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -80,7 +82,6 @@ class Brand {
     slug = json['slug'];
     icon = json['icon'];
   }
-
 }
 
 class Categories {

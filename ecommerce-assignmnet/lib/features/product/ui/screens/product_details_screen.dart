@@ -5,6 +5,7 @@ import 'package:assignment_project/features/common/ui/widgets/centered_circular_
 import 'package:assignment_project/features/product/data/models/product_model_by_id.dart';
 import 'package:assignment_project/features/product/ui/controllers/product_list_controller_by_id.dart';
 import 'package:assignment_project/features/common/ui/widgets/product_quantity_inc_dec_button.dart';
+import 'package:assignment_project/features/product/ui/screens/product_review_screen.dart';
 import 'package:assignment_project/services/network_caller/network_caller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,8 +25,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   int? _productPrice;
   AuthController authController = Get.find<AuthController>();
   Map<String, dynamic>? _map;
-  final NetworkCaller _networkCaller =
-  Get.find<NetworkCaller>();
+  final NetworkCaller _networkCaller = Get.find<NetworkCaller>();
 
   @override
   void initState() {
@@ -110,7 +110,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                           ],
                                         ),
                                         TextButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.pushNamed(context,
+                                                ProductReviewScreen.name);
+                                          },
                                           child: const Text('Reviews'),
                                         ),
                                         Container(
@@ -193,7 +196,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             width: 120,
             child: ElevatedButton(
               onPressed: () {
-                _networkCaller.postRequest(Urls.cartPostUrl, body: _map, accessToken: authController.accessToken);
+                _networkCaller.postRequest(Urls.cartPostUrl,
+                    body: _map, accessToken: authController.accessToken);
               },
               child: const Text('Add to Cart'),
             ),

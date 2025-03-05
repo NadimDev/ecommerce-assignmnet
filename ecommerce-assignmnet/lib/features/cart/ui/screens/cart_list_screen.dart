@@ -1,4 +1,5 @@
 import 'package:assignment_project/app/app_colors.dart';
+import 'package:assignment_project/features/cart/ui/controller/cart_item_controller.dart';
 import 'package:assignment_project/features/cart/ui/widgets/cart_product_item_widget.dart';
 import 'package:assignment_project/features/common/ui/controllers/main_bottom_nav_controller.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,16 @@ class CartListScreen extends StatefulWidget {
 }
 
 class _CartListScreenState extends State<CartListScreen> {
+  CartItemScreenController cartListController =
+      Get.find<CartItemScreenController>();
+
+  @override
+  void initState() {
+    super.initState();
+    // TODO: implement initState
+    cartListController.getCartItemList();
+  }
+
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -29,19 +40,28 @@ class _CartListScreenState extends State<CartListScreen> {
             icon: const Icon(Icons.arrow_back_ios),
           ),
         ),
-        body: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return const CartProductItemWidget();
-                },
+        body: GetBuilder<CartItemScreenController>(builder: (controller) {
+          if (controller.initialProgress) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: controller.cartItemList.length,
+                  itemBuilder: (context, index) {
+                    return CartProductItemWidget(
+                      cartModel: controller.cartItemList[index],
+                    );
+                  },
+                ),
               ),
-            ),
-            _buildPriceAndCheckoutSection(textTheme),
-          ],
-        ),
+              _buildPriceAndCheckoutSection(textTheme),
+            ],
+          );
+        }),
       ),
     );
   }

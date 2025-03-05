@@ -8,6 +8,8 @@ import 'package:assignment_project/features/category/ui/screens/category_list_sc
 import 'package:assignment_project/features/common/ui/screens/main_bottom_nav_screen.dart';
 import 'package:assignment_project/features/product/ui/screens/product_details_screen.dart';
 import 'package:assignment_project/features/product/ui/screens/product_list_screen.dart';
+import 'package:assignment_project/features/product/ui/screens/product_review_create_screen.dart';
+import 'package:assignment_project/features/product/ui/screens/product_review_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -48,6 +50,10 @@ class CraftyBay extends StatelessWidget {
         } else if (settings.name == ProductDetailsScreen.name) {
           String productId = settings.arguments as String;
           widget = ProductDetailsScreen(productId: productId);
+        } else if (settings.name == ProductReviewScreen.name) {
+          widget = const ProductReviewScreen();
+        } else if (settings.name == ProductReviewCreateScreen.name) {
+          widget = const ProductReviewCreateScreen();
         }
 
         return MaterialPageRoute(
